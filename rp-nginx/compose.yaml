@@ -1,0 +1,19 @@
+services:
+  api:
+    image: api
+    build: ./api
+    ports:
+      - "8080"
+    networks:
+      default:
+        aliases:
+          - api
+  nginx:
+    image: rp-nginx
+    build: ./nginx
+    ports:
+      - "8080:8080"
+    environment:
+      API_HOST: api
+      API_PORT: 8080
+      API_KEY: mysupersecretkey

@@ -1,0 +1,9 @@
+server {
+    listen 8080;
+    location / {
+        if ($args !~ (^|.*&)key=.*) {
+            set $args $args&key=${API_KEY};
+        }
+        proxy_pass   http://${API_HOST}:${API_PORT}/foo;
+    }
+}
